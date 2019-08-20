@@ -75,8 +75,18 @@ public class TestSql extends javax.swing.JFrame {
         });
 
         jButton2.setText("Actualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +153,31 @@ public class TestSql extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+            Statement stm = MoraConnection.getConnection().createStatement();
+            stm.execute("update persona set nombres='"+txtNombre.getText()+"',apellidos='"+txtApellido.getText()+"' where id='"+txtId.getText()+"'");
+            cargarData();
+        }catch(Exception e){
+            System.out.println("" + e);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        // TODO add your handling code here:
+            try{
+            Statement stm = MoraConnection.getConnection().createStatement();
+            stm.execute("delete from persona where id='"+txtId.getText()+"'");
+            cargarData();
+        }catch(Exception e){
+            System.out.println("" + e);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
